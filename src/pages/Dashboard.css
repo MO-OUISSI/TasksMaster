@@ -1,0 +1,570 @@
+/* Dashboard.css */
+/* Dashboard.css - Enhanced Design */
+
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .shortcuts-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .shortcuts-list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+/* Enhanced card styling with better visual hierarchy and smooth transitions */
+.shortcut-card {
+  background: linear-gradient(135deg, var(--background-alt) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  border-radius: 6px;
+  padding: 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Added pseudo-element for subtle background animation on hover */
+.shortcut-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.shortcut-card:hover::before {
+  left: 100%;
+}
+
+.shortcut-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.add-shortcut-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  border-style: dashed;
+  border-color: var(--border-color);
+}
+
+.add-shortcut-card:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.add-shortcut-card span {
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* Improved icon wrapper with better visual design and shadow effects */
+.shortcut-icon-wrapper {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.shortcut-card:hover .shortcut-icon-wrapper {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Updated color palette with more vibrant, modern colors */
+.shortcut-icon-wrapper.calendar {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.shortcut-icon-wrapper.weekly {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+.shortcut-icon-wrapper.projects {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.shortcut-icon-wrapper.profile {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.shortcut-icon-wrapper.settings {
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+}
+
+.shortcut-icon-wrapper.notes{ 
+  background: linear-gradient(135deg, #ffbb3c 0%, #ffaf1a 100%);
+}
+
+/* Enhanced text wrapper with better typography hierarchy */
+.shortcut-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.shortcut-text-wrapper strong {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.3px;
+  transition: color 0.3s ease;
+}
+
+.shortcut-card:hover .shortcut-text-wrapper strong {
+  color: var(--primary-color);
+}
+
+.shortcut-text-wrapper span {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Improved arrow icon with better positioning and animation */
+.shortcut-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--text-tertiary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.6;
+}
+
+.shortcut-card:hover .shortcut-arrow {
+  color: var(--primary-color);
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* Added empty state styling */
+.empty-state-text {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.empty-state-text p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+
+/* Shortcut Editor Modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content { 
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.modal-header-new {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    background-color: var(--background-alt);
+}
+
+.modal-header-new h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--dark-text);
+}
+
+.modal-header-new p {
+    margin: 0.25rem 0 0;
+    color: var(--light-text);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--light-text);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--primary-color);
+    background-color: var(--light-bg);
+}
+
+.modal-header { /* Keeping old modal-header for compatibility if used elsewhere, but new one is modal-header-new */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-body {
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.shortcut-editor-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.shortcut-editor-list li {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.75rem;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.shortcut-editor-list li:hover {
+    background-color: var(--background-alt);
+}
+
+.shortcut-editor-label {
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    width: 44px;
+    height: 24px;
+    background-color: var(--border-color);
+    border-radius: 12px;
+    padding: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.toggle-knob {
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.toggle-switch.active {
+    background-color: var(--primary-color);
+}
+
+.toggle-switch.active .toggle-knob {
+    transform: translateX(20px);
+}
+
+.empty-state-text {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main Card */
+.card_container {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 30%,
+    var(--accent-color) 70%,
+    #8dd3f5 100%
+  );
+  border-radius: 24px;
+  padding: 34px 40px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.card_container::before,
+.card_container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.card_container::before {
+  top: -100px;
+  right: -50px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+}
+
+.card_container::after {
+  top: -50px;
+  right: -100px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+}
+
+/* Decorative Shapes */
+.card_triangle-1 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 180px solid rgba(79, 195, 247, 0.6);
+  right: 120px;
+  top: -40px;
+}
+
+.card_triangle-2 {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 150px solid rgba(141, 211, 245, 0.7);
+  right: 60px;
+  top: -20px;
+}
+
+/* Content */
+.card_content {
+  position: relative;
+  z-index: 2;
+}
+
+.card_header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card_icon {
+  width: 28px;
+  height: 28px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.card_title {
+  color: var(--header-text);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.card_description {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 450px;
+}
+
+/* Buttons */
+.card_buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.card_btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card_btn-primary {
+  background: white;
+  color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card_btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card_btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.card_btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.card_sparkle {
+  font-size: 18px;
+}
+
+.card_arrow {
+  font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#btn_dash1{
+  text-decoration: none;
+}
